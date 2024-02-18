@@ -1,23 +1,38 @@
 name: 06 - Contexts
 
 on:
-    push:
-    workflow_dispatch:
+  push:
+  workflow_dispatch:
+
+env:
+  MY_WORKFLOW_VAR: "workflow"
+  MY_OVERWRITTEN_VAR: "workflow"
 
 jobs:
-    echo-data:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Display Event Information
-              run: |
-                echo "Event name: ${{ github.event_name }}"
-                echo "Ref: ${{ github.ref }}"
-                echo "SHA: ${{ github.sha }}"
-                echo "Actor: ${{ github.actor }}"
-                echo "Workflow: ${{ github.workflow }}"
-                echo "Run ID: ${{ github.run_id}}"
-                echo "Run number: ${{ github.run_number }}"
-            - name: Use Secret
-              run: |
-                echo "Variable value: ${{ vars.MY_VAR }}"
-        
+  echo-data:
+    runs-on: ubuntu-latest
+    env:
+      MY_OVERWRITTEN_VAR: "job"
+    steps:
+      - name: Display Event Information
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id}}"
+          echo "Run number: ${{ github.run_number }}"
+      - name: Use Secret
+        run: |
+          echo "Variable value: ${{ vars.MY_VAR }}"
+      - name: Print env VARs
+        env:
+          MY_OVERWRITTEN_VAR: "job"
+        run: |
+          echo "MY_WORKFLOW_VAR: ${{ env.MY_WORKFLOW_VAR }}"
+          echo "MY_OVERWRITTEN_VAR: ${{ env.MY_OVERWRITTEN_VAR }}"
+      - name: Print env VARs 2
+        run: |
+          echo "MY_WORKFLOW_VAR: ${{ env.MY_WORKFLOW_VAR }}"
+          echo "MY_OVERWRITTEN_VAR: ${{ env.MY_OVERWRITTEN_VAR }}"
