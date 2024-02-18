@@ -19,5 +19,5 @@ jobs:
                 echo "Run number: ${{ github.run_number }}"
             - name: Use Secret
               run: |
-                echo "Variable value: ${{ vsrs.MY_VAR }}"
+                echo "Variable value: ${{ vars.MY_VAR }}"
         
