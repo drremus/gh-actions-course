@@ -8,7 +8,8 @@ jobs:
     echo-data:
         runs-on: ubuntu-latest
         steps:
-            - run: |
+            - name: Display Event Information
+              run: |
                 echo "Event name: ${{ github.event_name }}"
                 echo "Ref: ${{ github.ref }}"
                 echo "SHA: ${{ github.sha }}"
@@ -16,3 +17,7 @@ jobs:
                 echo "Workflow: ${{ github.workflow }}"
                 echo "Run ID: ${{ github.run_id}}"
                 echo "Run number: ${{ github.run_number }}"
+            - name: Use Secret
+              run: |
+                echo "Variable value: ${{ vsrs.MY_VAR }}"
+        
