@@ -8,6 +8,5 @@ jobs:
     name: echo-data
     runs-on: ubuntu-latest
     steps:
-        - run: "Event name: ${{ github.event_name }}""
+        - run: "Event name: ${{ github.event_name }}"
 
-```
